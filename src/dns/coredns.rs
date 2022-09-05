@@ -265,6 +265,8 @@ impl CoreDns {
                             if !resolved_ip_list.is_empty()
                                 && (record_type == RecordType::A || record_type == RecordType::AAAA)
                             {
+                                resolved_ip_list.sort_unstable();
+                                resolved_ip_list.dedup();
                                 for record_addr in resolved_ip_list {
                                     match record_addr {
                                         IpAddr::V4(ipv4) => {
